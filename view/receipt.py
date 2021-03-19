@@ -25,16 +25,16 @@ class ChoiceReceipt(tk.Toplevel):
     def choice_second(self):
         self.choice_receipt(0)
 
-    # выбор типа квитанции
     def choice_receipt(self, flag):
+        row = self.dao.debt.get_by_number(self.find_v)
         if flag:
-            payment = self.dao.payment.get_by_id(self.number[0])
+            debt = self.dao.debt.get_by_id(row[0][0])
+            payment = self.dao.payment.get_by_id(self.number)
             owner = self.dao.owner.get_by_number(payment[1])
             main(payment[1], payment[2], payment[3], payment[5], payment[6],
                  payment[7], payment[8], payment[8] - payment[7], owner[3],
-                 owner[4], owner[5], owner[2])
+                 owner[4], owner[5], owner[2], debt[2])
         else:
-            row = self.dao.debt.get_by_number(self.find_v)
             debt = self.dao.debt.get_by_id(row[1][0])
             owner = self.dao.owner.get_by_number(self.find_v)
             optional(debt[1], debt[2], owner[3], owner[4], owner[5], owner[2])
