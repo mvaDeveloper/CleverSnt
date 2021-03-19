@@ -29,5 +29,5 @@ if __name__ == "__main__":
     app = owners.Owners(root, OwnersMenuActions(), db)
     app.pack()
     root.title("Clever SNT")
-    root.geometry("1050x650+250+100")
+    root.geometry("1050x650+0+0")
     root.mainloop()

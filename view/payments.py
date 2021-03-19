@@ -11,7 +11,7 @@ class Payments(tk.Toplevel):
         self.db = db
         self.title('Квитанции участка № ' + str(self.find_v))
         tk.Toplevel.configure(self, bg="#f0eae1")
-        self.geometry('1500x520+10+300')
+        self.geometry('1410x670+110+0')
         Menu(self, find_v, self.db)
 
 
@@ -19,14 +19,14 @@ class Menu:
     def __init__(self, root, find_v, db):
         self.db = db
         self.action = PaymentsMenuActions
-        self.btn_receipt = button_menu(root, 'Сформировать квитанцию', self.receipt, find_v, 1, 30)
-        self.btn_diversity = button_menu(root, 'Разнести платеж', self.action.diversity_payment, find_v, 1, 150)
-        self.btn_change = button_menu(root, 'Изменить платеж', self.update, find_v, 1, 270)
-        self.btn_delete = button_menu(root, 'Удалить платеж', self.delete, find_v, 1, 390)
+        self.btn_receipt = button_menu(root, 'Сформировать квитанцию', self.receipt, find_v, 1, 0)
+        self.btn_diversity = button_menu(root, 'Разнести платеж', self.action.diversity_payment, find_v, 1, 120)
+        self.btn_change = button_menu(root, 'Изменить платеж', self.update, find_v, 1, 240)
+        self.btn_delete = button_menu(root, 'Удалить платеж', self.delete, find_v, 1, 360)
 
         columns = ['id', 'cost_payment', 'date_payment', 'target_contribution', 'membership_fee', 'electricity',
                    'date_begin', 'date_end', 'balance', 'status', 'type_payment']
-        widths = [40, 110, 110, 110, 100, 130, 130, 130, 80, 130, 90]
+        widths = [30, 110, 110, 110, 100, 130, 130, 130, 80, 130, 90]
         names = ['id', 'Сумма платежа', 'Дата платежа', 'Целевой взнос', 'Членский взнос', 'Плата электричество',
                  'Начальные показания', 'Конечные показания', 'Сальдо', 'Статус', 'Тип']
         self.tree = tree(root, columns)

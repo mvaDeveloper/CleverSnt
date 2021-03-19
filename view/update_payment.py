@@ -14,26 +14,26 @@ class UpdatePayment(tk.Toplevel):
         self.window = window
         self.tree = tree
         tk.Toplevel.configure(self, bg="#f0eae1")
-        self.geometry('450x400+400+300')
+        self.geometry('400x400+350+130')
         self.title('Редактировать позицию')
-        title_label(self, 'Изменение платежа', 150, 10)
-        x = 220
-        self.entry_lot_number = input_payments(self, 'Номер участка:', ttk.Entry(self), x, 35)
-        self.entry_cost_payment = input_payments(self, 'Сумма платежа:', ttk.Entry(self), x, 60)
-        self.entry_date_payment = input_payments(self, 'Дата:', ttk.Entry(self), x, 85)
-        self.entry_target_contribution = input_payments(self, 'Целевой взнос:', ttk.Entry(self), x, 110)
-        self.entry_membership_fee = input_payments(self, 'Членский взнос:', ttk.Entry(self), x, 135)
-        self.entry_electricity = input_payments(self, 'Элнетричество:', ttk.Entry(self), x, 160)
-        self.entry_date_begin = input_payments(self, 'Начальные показания:', ttk.Entry(self), x, 185)
-        self.entry_date_end = input_payments(self, 'Конечные показания:', ttk.Entry(self), x, 210)
+        title_label(self, 'Изменение платежа', 135, 15)
+        x = 185
+        self.entry_lot_number = input_payments(self, 'Номер участка:', ttk.Entry(self), x, 50)
+        self.entry_cost_payment = input_payments(self, 'Сумма платежа:', ttk.Entry(self), x, 75)
+        self.entry_date_payment = input_payments(self, 'Дата:', ttk.Entry(self), x, 100)
+        self.entry_target_contribution = input_payments(self, 'Целевой взнос:', ttk.Entry(self), x, 125)
+        self.entry_membership_fee = input_payments(self, 'Членский взнос:', ttk.Entry(self), x, 150)
+        self.entry_electricity = input_payments(self, 'Элнетричество:', ttk.Entry(self), x, 175)
+        self.entry_date_begin = input_payments(self, 'Начальные показания:', ttk.Entry(self), x, 200)
+        self.entry_date_end = input_payments(self, 'Конечные показания:', ttk.Entry(self), x, 225)
         self.entry_combobox_status = input_payments(self, 'Статус:', ttk.Combobox(self,
                                                                                   values=[u"Не оплачен",
                                                                                           u"Оплачен частично",
-                                                                                          u"Оплачен"]), x, 235)
+                                                                                          u"Оплачен"]), x, 250)
         self.entry_combobox_type = input_payments(self, 'Тип:', ttk.Combobox(self,
                                                                              values=["Выставленный",
-                                                                                     "Выплаченный"]), x, 260)
-        button(self, 'Редактировать', self.payment_update, 15, 150, 310)
+                                                                                     "Выплаченный"]), x, 275)
+        button(self, 'Редактировать', self.payment_update, 15, 135, 315)
         self.default_data()
 
     # заполнение полей ввода исходной информацией

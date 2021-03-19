@@ -11,18 +11,23 @@ class AddOwner(tk.Toplevel):
         self.window = window
         self.tree = tree
         self.title('Добавить собственника')
-        self.geometry('500x320+400+300')
+        self.geometry('400x320+142+30')
         tk.Toplevel.configure(self, bg="#f0eae1")
-        title_label(self, 'Добавление собственника', 130, 10)
-        x = 100
-        self.entry_lot_number = input_owners(self, 'Номер участка:', ttk.Entry(self), x, 35)
-        self.entry_second_name = input_owners(self, 'Фамилия:', ttk.Entry(self), x, 65)
-        self.entry_first_name = input_owners(self, 'Имя:', ttk.Entry(self), x, 90)
-        self.entry_patronymic = input_owners(self, 'Отчество:', ttk.Entry(self), x, 115)
-        self.entry_address = input_owners(self, 'Адрес:', ttk.Entry(self), x, 140)
-        self.entry_square = input_owners(self, 'Площадь участка:', ttk.Entry(self), x, 165)
-        self.combobox_electricity = input_owners(self, 'Электричество:', ttk.Combobox(self, values=["Есть", "Нет"]), x, 190)
-        button(self, 'Добавить', self.on_save, 15, 170, 230)
+        title_label(self, 'Добавление собственника', 100, 15)
+        x = 70
+        self.entry_lot_number = input_owners(self, 'Номер участка:', ttk.Entry(self), x, 50)
+        self.entry_second_name = input_owners(self, 'Фамилия:', ttk.Entry(self), x, 75)
+        self.entry_first_name = input_owners(self, 'Имя:', ttk.Entry(self), x, 100)
+        self.entry_patronymic = input_owners(self, 'Отчество:', ttk.Entry(self), x, 125)
+        self.entry_address = input_owners(self, 'Адрес:', ttk.Entry(self), x, 150)
+        self.entry_square = input_owners(self, 'Площадь участка:', ttk.Entry(self), x, 175)
+        self.combobox_electricity = input_owners(self,
+                                                 'Электричество:',
+                                                 ttk.Combobox(self, values=["Есть", "Нет"]),
+                                                 x,
+                                                 200
+                                                 )
+        button(self, 'Добавить', self.on_save, 15, 140, 240)
         self.grab_set()
         self.focus_set()
 

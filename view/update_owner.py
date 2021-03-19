@@ -12,24 +12,24 @@ class UpdateOwner(tk.Toplevel):
         self.tree = tree
         self.owner_id = owner_id
         self.title('Редактировать информацию о собственнике')
-        self.geometry('500x320+400+300')
+        self.geometry('400x320+142+328')
         tk.Toplevel.configure(self, bg="#f0eae1")
-        title_label(self, 'Редактировать информацию о собственнике', 65, 10)
-        x = 100
-        self.entry_lot_number = input_owners(self, 'Номер участка:', ttk.Entry(self), x, 45)
-        self.entry_second_name = input_owners(self, 'Фамилия:', ttk.Entry(self), x, 70)
-        self.entry_first_name = input_owners(self, 'Имя:', ttk.Entry(self), x, 95)
-        self.entry_patronymic = input_owners(self, 'Отчество:', ttk.Entry(self), x, 120)
-        self.entry_address = input_owners(self, 'Адрес:', ttk.Entry(self), x, 145)
-        self.entry_square = input_owners(self, 'Площадь участка:', ttk.Entry(self), x, 170)
+        title_label(self, 'Редактировать информацию о собственнике', 25, 15)
+        x = 70
+        self.entry_lot_number = input_owners(self, 'Номер участка:', ttk.Entry(self), x, 50)
+        self.entry_second_name = input_owners(self, 'Фамилия:', ttk.Entry(self), x, 75)
+        self.entry_first_name = input_owners(self, 'Имя:', ttk.Entry(self), x, 100)
+        self.entry_patronymic = input_owners(self, 'Отчество:', ttk.Entry(self), x, 125)
+        self.entry_address = input_owners(self, 'Адрес:', ttk.Entry(self), x, 150)
+        self.entry_square = input_owners(self, 'Площадь участка:', ttk.Entry(self), x, 175)
         self.combobox_electricity = input_owners(self,
                                                  'Электричество:',
                                                  ttk.Combobox(self, values=["Есть", "Нет"]),
                                                  x,
-                                                 195
+                                                 200
                                                  )
         self.default_data()
-        button(self, 'Редактировать', self.on_save, 15, 170, 230)
+        button(self, 'Редактировать', self.on_save, 15, 120, 240)
 
         self.grab_set()
         self.focus_set()
@@ -51,6 +51,7 @@ class UpdateOwner(tk.Toplevel):
 
     def default_data(self):
         owner = self.dao.owner.get_by_id(self.owner_id)
+        print(self)
         self.entry_lot_number.insert(0, owner[1])
         self.entry_second_name.insert(0, owner[2])
         self.entry_first_name.insert(0, owner[3])

@@ -10,26 +10,26 @@ class DiversityPayment(tk.Toplevel):
         self.making_payment = making_payment
         self.db = db
         self.title('Разнести платеж')
-        self.geometry('450x340+400+300')
+        self.geometry('400x340+350+130')
         tk.Toplevel.configure(self, bg="#f0eae1")
-        title_label(self, 'Разнести платеж', 170, 10)
-        x = 220
-        self.entry_lot_number = input_payments(self, 'Номер участка:', ttk.Entry(self), x, 40)
-        self.entry_date_payment = input_payments(self, 'Дата:', ttk.Entry(self), x, 65)
-        self.entry_target_contribution = input_payments(self, 'Целевой взнос:', ttk.Entry(self), x, 90)
-        self.entry_membership_fee = input_payments(self, 'Членский взнос:', ttk.Entry(self), x, 115)
-        self.entry_electricity = input_payments(self, 'Электричество:', ttk.Entry(self), x, 140)
-        self.entry_cost_payment = input_payments(self, 'Сумма:', ttk.Entry(self), x, 165)
+        title_label(self, 'Разнести платеж', 130, 15)
+        x = 170
+        self.entry_lot_number = input_payments(self, 'Номер участка:', ttk.Entry(self), x, 50)
+        self.entry_date_payment = input_payments(self, 'Дата:', ttk.Entry(self), x, 75)
+        self.entry_target_contribution = input_payments(self, 'Целевой взнос:', ttk.Entry(self), x, 100)
+        self.entry_membership_fee = input_payments(self, 'Членский взнос:', ttk.Entry(self), x, 125)
+        self.entry_electricity = input_payments(self, 'Электричество:', ttk.Entry(self), x, 150)
+        self.entry_cost_payment = input_payments(self, 'Сумма:', ttk.Entry(self), x, 175)
         self.entry_combobox_status = input_payments(self, 'Статус:', ttk.Combobox(self,
                                                                                   values=[u"Не оплачен",
                                                                                           u"Оплачен частично",
-                                                                                          u"Оплачен"]), x, 190)
+                                                                                          u"Оплачен"]), x, 200)
         self.entry_combobox_type = input_payments(self, 'Тип:', ttk.Combobox(self,
                                                                              values=["Выставленный",
-                                                                                     "Выплаченный"]), x, 215)
+                                                                                     "Выплаченный"]), x, 225)
 
-        button(self, 'Посчитать сумму', self.calculation_cost, 15, 65, 245)
-        button(self, 'Разнести', self.performance_add, 15, 255, 245)
+        button(self, 'Посчитать сумму', self.calculation_cost, 15, 25, 265)
+        button(self, 'Разнести', self.performance_add, 15, 235, 265)
         self.default_data()
 
     def default_data(self):
