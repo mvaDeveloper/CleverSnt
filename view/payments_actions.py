@@ -6,9 +6,9 @@ import dao
 class PaymentsMenuActions:
 
     @staticmethod
-    def diversity_payment(find_v):
+    def diversity_payment(find_v, self, tree):
         db = dao.DAO()
-        diversity_payment.DiversityPayment(find_v, making_payment, db)
+        diversity_payment.DiversityPayment(find_v, making_payment, db, self, tree)
 
     @staticmethod
     def open_update_pay(find_v, number, self, tree):

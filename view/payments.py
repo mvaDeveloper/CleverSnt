@@ -20,7 +20,7 @@ class Menu:
         self.db = db
         self.action = PaymentsMenuActions
         self.btn_receipt = button_menu(root, 'Сформировать квитанцию', self.receipt, find_v, 1, 0)
-        self.btn_diversity = button_menu(root, 'Разнести платеж', self.action.diversity_payment, find_v, 1, 120)
+        self.btn_diversity = button_menu(root, 'Разнести платеж', self.diversity, find_v, 1, 120)
         self.btn_change = button_menu(root, 'Изменить платеж', self.update, find_v, 1, 240)
         self.btn_delete = button_menu(root, 'Удалить платеж', self.delete, find_v, 1, 360)
 
@@ -48,6 +48,9 @@ class Menu:
         payment_id = self.tree.set(self.tree.selection()[0], '#1')
         self.db.payment.delete(payment_id)
         view_payments(self, self.tree, find_v)
+
+    def diversity(self, find_v):
+        self.action.diversity_payment(find_v, self, self.tree)
 
     def update(self, find_v):
         payment_id = self.tree.set(self.tree.selection()[0], '#1')

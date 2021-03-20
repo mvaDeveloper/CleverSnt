@@ -1,14 +1,17 @@
 import tkinter as tk
 from tkinter import ttk
 from view.utilities import title_label, button, input_payments
+from view.table_view import view_payments
 
 
 class DiversityPayment(tk.Toplevel):
-    def __init__(self, find_v, making_payment, db):
+    def __init__(self, find_v, making_payment, db, window, tree):
         super().__init__()
         self.find_v = find_v
         self.making_payment = making_payment
         self.db = db
+        self.window = window
+        self.tree = tree
         self.title('Разнести платеж')
         self.geometry('400x340+350+130')
         tk.Toplevel.configure(self, bg="#f0eae1")
@@ -65,3 +68,5 @@ class DiversityPayment(tk.Toplevel):
         debt = self.db.debt.get_by_id(debt_id)
         self.db.debt.update(self.find_v, debt[2] - float(cost_payment), debt[3] - float(target_contribution),
                             debt[4] - float(membership_fee), debt[5] - float(electricity), balance, debt_id)
+        view_payments(self.window, self.tree, self.find_v)
+        self.destroy()
