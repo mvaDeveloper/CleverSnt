@@ -3,7 +3,6 @@ import datetime
 
 def calculation(electricity, square, date_payment, date_begin):
     year = int(date_payment[-2] + date_payment[-1])
-    # если введено пустое значение преобразовать его в 0
     if date_begin == "":
         date_begin = 0
     else:
@@ -42,12 +41,34 @@ def change_electricity(date_end, date_begin, cost_payment, balance, rate_kvt):
     return [electricity, cost_payment, balance, date_payment]
 
 
-def check_update_payment(cost_payment, balance, target_contribution_begin, membership_fee_begin, electricity_begin,
-                         target_contribution_end, membership_fee_end, electricity_end):
+def calculation_diff(target_contribution_begin, membership_fee_begin, electricity_begin,
+                     target_contribution_end, membership_fee_end, electricity_end):
     target_contribution_diff = float(target_contribution_end) - float(target_contribution_begin)
     membership_fee_diff = float(membership_fee_end) - float(membership_fee_begin)
     electricity_diff = float(electricity_end) - float(electricity_begin)
     diff = target_contribution_diff + membership_fee_diff + electricity_diff
+    return [target_contribution_diff, membership_fee_diff, electricity_diff, diff]
+
+
+def check_update_payment(cost_payment, balance, target_contribution_begin, membership_fee_begin, electricity_begin,
+                         target_contribution_end, membership_fee_end, electricity_end):
+    difference = calculation_diff(target_contribution_begin, membership_fee_begin, electricity_begin,
+                                  target_contribution_end, membership_fee_end, electricity_end)
+    diff = difference[3]
     cost_payment = float(cost_payment) + diff
     balance = float(balance) + diff
     return [cost_payment, balance]
+
+
+def update_debt_diff(cost_payment_begin, cost_payment_end, target_contribution_begin,
+                     membership_fee_begin, electricity_begin, target_contribution_end, membership_fee_end,
+                     electricity_end, cost_payment_debt, target_contribution_debt, membership_fee_debt,
+                     electricity_debt, balance_debt):
+    difference = calculation_diff(target_contribution_begin, membership_fee_begin, electricity_begin,
+                                  target_contribution_end, membership_fee_end, electricity_end)
+    cost_payment_debt = float(cost_payment_end) - float(cost_payment_begin) + float(cost_payment_debt) + difference[3]
+    target_contribution_debt = target_contribution_debt + difference[0]
+    membership_fee_debt = membership_fee_debt + difference[1]
+    electricity_debt = electricity_debt + difference[2]
+    balance_debt = float(balance_debt) + float(cost_payment_end) - float(cost_payment_begin) + difference[3]
+    return [cost_payment_debt, target_contribution_debt, membership_fee_debt, electricity_debt, balance_debt]

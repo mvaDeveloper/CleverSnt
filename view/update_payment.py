@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from view.utilities import title_label, button, input_payments
-from logiс.scripts import check_update_payment
+from logiс.scripts import check_update_payment, update_debt_diff
 from view.table_view import view_payments
 
 
@@ -60,6 +60,7 @@ class UpdatePayment(tk.Toplevel):
 
     def payment_update(self):
         payment_begin = self.dao.payment.get_by_id(self.number)
+        self.debt_update(payment_begin)
         diff = check_update_payment(self.entry_cost_payment.get(), payment_begin[9],
                                     payment_begin[4], payment_begin[5], payment_begin[6],
                                     self.entry_target_contribution.get(),
@@ -74,19 +75,12 @@ class UpdatePayment(tk.Toplevel):
         view_payments(self.window, self.tree, self.find_v)
         self.destroy()
 
-    def debt_update(self, lot_number, cost_payment, target_contribution,
-                    membership_fee, electricity, balance,
-                    ):
-        row = list(self.dao.debt.get_by_number(lot_number))
+    def debt_update(self, payment_begin):
+        row = list(self.dao.debt.get_by_number(self.find_v))
         debt_id = row[1][0]
         debt = self.dao.debt.get_by_id(debt_id)
-        self.dao.debt.update(lot_number, debt[2] + float(cost_payment), debt[3] + float(target_contribution),
-                             debt[4] + float(membership_fee), debt[5] + float(electricity), balance, debt_id)
-
-    def electricity_availability(self, lot_number):
-        row = self.dao.owner.get_by_number(lot_number)
-        return row[7]
-
-    def information_balance(self):
-        row = self.dao.payment.get_by_id(self.number)
-        return row[9]
+        debt_new = update_debt_diff(payment_begin[2], self.entry_cost_payment.get(), payment_begin[4],
+                                    payment_begin[5], payment_begin[6],  self.entry_target_contribution.get(),
+                                    self.entry_membership_fee.get(), self.entry_electricity.get(),
+                                    debt[2], debt[3], debt[4], debt[5], debt[6])
+        self.dao.debt.update(self.find_v, debt_new[0], debt_new[1], debt_new[2], debt_new[3], debt_new[4], debt_id)
