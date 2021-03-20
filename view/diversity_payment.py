@@ -60,7 +60,7 @@ class DiversityPayment(tk.Toplevel):
     def debt_update(self, cost_payment, target_contribution,
                     membership_fee, electricity, balance,
                     ):
-        row = list(self.db.get_debt_number(self.find_v))
+        row = list(self.db.debt.get_by_number(self.find_v))
         debt_id = row[1][0]
         debt = self.db.debt.get_by_id(debt_id)
         self.db.debt.update(self.find_v, debt[2] - float(cost_payment), debt[3] - float(target_contribution),
