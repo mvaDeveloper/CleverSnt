@@ -38,10 +38,8 @@ def change_electricity(electricity, date_payment, electricity_availability,
         rate_kvt_2021 = 2.91
         if electricity_availability == "Есть":
             flag = 1
-            print("1")
         else:
             flag = 0
-            print("0")
         if flag:
             if year == 20 or year == 21:
                 electricity = (float(date_end) - float(date_begin)) * rate_kvt_2021

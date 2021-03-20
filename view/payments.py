@@ -22,7 +22,8 @@ class Menu:
         self.btn_receipt = button_menu(root, 'Сформировать квитанцию', self.receipt, find_v, 1, 0)
         self.btn_diversity = button_menu(root, 'Разнести платеж', self.diversity, find_v, 1, 120)
         self.btn_change = button_menu(root, 'Изменить платеж', self.update, find_v, 1, 240)
-        self.btn_delete = button_menu(root, 'Удалить платеж', self.delete, find_v, 1, 360)
+        self.btn_change_electricity = button_menu(root, 'Изменить электричество', self.update_electric, find_v, 1, 360)
+        self.btn_delete = button_menu(root, 'Удалить платеж', self.delete, find_v, 1, 480)
 
         columns = ['id', 'cost_payment', 'date_payment', 'target_contribution', 'membership_fee', 'electricity',
                    'date_begin', 'date_end', 'balance', 'status', 'type_payment']
@@ -54,7 +55,11 @@ class Menu:
 
     def update(self, find_v):
         payment_id = self.tree.set(self.tree.selection()[0], '#1')
-        self.action.open_update_pay(find_v, payment_id, self, self.tree)
+        self.action.update(find_v, payment_id, self, self.tree)
+
+    def update_electric(self, find_v):
+        payment_id = self.tree.set(self.tree.selection()[0], '#1')
+        self.action.update_electric(find_v, payment_id, self, self.tree)
 
     def receipt(self, find_v):
         payment_id = self.tree.set(self.tree.selection()[0], '#1')
