@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 from view.utilities import title_label, button, input_payments
+from logiс.scripts import change_electricity
+from view.table_view import view_payments
 
 
 class UpdateElectric(tk.Toplevel):
@@ -12,11 +14,19 @@ class UpdateElectric(tk.Toplevel):
         self.window = window
         self.tree = tree
         tk.Toplevel.configure(self, bg="#f0eae1")
-        self.geometry('400x180+350+370')
+        self.geometry('400x205+350+370')
         self.title('Изменить информацию об электричестве')
         title_label(self, 'Изменение конечных показаний', 70, 15)
         self.entry_date_end = input_payments(self, 'Конечные показания:', ttk.Entry(self), 185, 50)
-        button(self, 'Редактировать', self.update_electric, 15, 135, 90)
+        self.entry_rate = input_payments(self, 'Тариф:', ttk.Combobox(self, values=[u"2.91"]), 185, 75)
+        button(self, 'Редактировать', self.update_electric, 15, 135, 115)
 
     def update_electric(self):
-        pass
+        payment = self.dao.payment.get_by_id(self.number)
+        changes = change_electricity(self.entry_date_end.get(), payment[7], payment[2],
+                                     payment[9], self.entry_rate.get()
+                                     )
+        self.dao.payment.update(payment[1], changes[1], changes[3], payment[4], payment[5], changes[0], payment[7],
+                                self.entry_date_end.get(), changes[2], payment[10], payment[11], self.number)
+        view_payments(self.window, self.tree, self.find_v)
+        self.destroy()

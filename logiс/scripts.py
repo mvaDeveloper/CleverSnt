@@ -1,3 +1,6 @@
+import datetime
+
+
 def calculation(electricity, square, date_payment, date_begin):
     year = int(date_payment[-2] + date_payment[-1])
     # если введено пустое значение преобразовать его в 0
@@ -30,25 +33,10 @@ def making_payment(balance, cost_payment):
     return balance
 
 
-def change_electricity(electricity, date_payment, electricity_availability,
-                       date_end, date_begin, cost_payment, information_balance):
-    if electricity == "0.0":
-        print(electricity)
-        year = int(date_payment[-2] + date_payment[-1])
-        rate_kvt_2021 = 2.91
-        if electricity_availability == "Есть":
-            flag = 1
-        else:
-            flag = 0
-        if flag:
-            if year == 20 or year == 21:
-                electricity = (float(date_end) - float(date_begin)) * rate_kvt_2021
-            else:
-                electricity = -1
-        else:
-            electricity = 0
-        cost_payment = float(cost_payment) + electricity
-        balance = information_balance + electricity
-    else:
-        balance = information_balance
-    return [electricity, cost_payment, balance]
+def change_electricity(date_end, date_begin, cost_payment, balance, rate_kvt):
+    today = datetime.datetime.today()
+    date_payment = str(today.day) + '.' + str(today.month) + '.' + str(today.year)
+    electricity = (float(date_end) - float(date_begin)) * float(rate_kvt)
+    cost_payment = float(cost_payment) + electricity
+    balance = balance + electricity
+    return [electricity, cost_payment, balance, date_payment]
