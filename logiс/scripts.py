@@ -72,3 +72,13 @@ def update_debt_diff(cost_payment_begin, cost_payment_end, target_contribution_b
     electricity_debt = electricity_debt + difference[2]
     balance_debt = float(balance_debt) + float(cost_payment_end) - float(cost_payment_begin) + difference[3]
     return [cost_payment_debt, target_contribution_debt, membership_fee_debt, electricity_debt, balance_debt]
+
+
+def debt_calculate_diversity(cost_payment, target_contribution, membership_fee, electricity, cost_payment_debt,
+                             target_contribution_debt, membership_fee_debt, electricity_debt):
+    cost_payment_debt = cost_payment_debt - float(cost_payment)
+    target_contribution_debt = target_contribution_debt - float(target_contribution)
+    membership_fee_debt = membership_fee_debt - float(membership_fee)
+    electricity_debt = electricity_debt - float(electricity)
+    balance_debt = cost_payment_debt
+    return [cost_payment_debt, target_contribution_debt, membership_fee_debt, electricity_debt, balance_debt]
