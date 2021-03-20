@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from view.utilities import title_label, button, input_payments
-from logiс.scripts import change_electricity
+from logiс.scripts import check_update_payment
 from view.table_view import view_payments
 
 
@@ -23,7 +23,7 @@ class UpdatePayment(tk.Toplevel):
         self.entry_date_payment = input_payments(self, 'Дата:', ttk.Entry(self), x, 100)
         self.entry_target_contribution = input_payments(self, 'Целевой взнос:', ttk.Entry(self), x, 125)
         self.entry_membership_fee = input_payments(self, 'Членский взнос:', ttk.Entry(self), x, 150)
-        self.entry_electricity = input_payments(self, 'Элнетричество:', ttk.Entry(self), x, 175)
+        self.entry_electricity = input_payments(self, 'Элетричество:', ttk.Entry(self), x, 175)
         self.entry_date_begin = input_payments(self, 'Начальные показания:', ttk.Entry(self), x, 200)
         self.entry_date_end = input_payments(self, 'Конечные показания:', ttk.Entry(self), x, 225)
         self.entry_combobox_status = input_payments(self, 'Статус:', ttk.Combobox(self,
@@ -59,20 +59,18 @@ class UpdatePayment(tk.Toplevel):
             self.entry_combobox_type.current(0)
 
     def payment_update(self):
-        payment = change_electricity(self.entry_electricity.get(), self.entry_date_payment.get(),
-                                     self.electricity_availability(self.find_v), self.entry_date_end.get(),
-                                     self.entry_date_begin.get(), self.entry_cost_payment.get(),
-                                     self.information_balance()
-                                     )
-        self.dao.payment.update(self.find_v, payment[1], self.entry_date_payment.get(),
+        payment_begin = self.dao.payment.get_by_id(self.number)
+        diff = check_update_payment(self.entry_cost_payment.get(), payment_begin[9],
+                                    payment_begin[4], payment_begin[5], payment_begin[6],
+                                    self.entry_target_contribution.get(),
+                                    self.entry_membership_fee.get(), self.entry_electricity.get()
+                                    )
+        self.dao.payment.update(self.find_v, diff[0], self.entry_date_payment.get(),
                                 self.entry_target_contribution.get(), self.entry_membership_fee.get(),
-                                payment[0], self.entry_date_begin.get(), self.entry_date_end.get(),
-                                payment[1], self.entry_combobox_status.get(), self.entry_combobox_type.get(),
+                                self.entry_electricity.get(), self.entry_date_begin.get(), self.entry_date_end.get(),
+                                diff[1], self.entry_combobox_status.get(), self.entry_combobox_type.get(),
                                 self.number
                                 )
-        self.debt_update(self.find_v, payment[1], self.entry_target_contribution.get(),
-                         self.entry_membership_fee.get(), payment[0], payment[2]
-                         )
         view_payments(self.window, self.tree, self.find_v)
         self.destroy()
 

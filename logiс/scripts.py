@@ -40,3 +40,14 @@ def change_electricity(date_end, date_begin, cost_payment, balance, rate_kvt):
     cost_payment = float(cost_payment) + electricity
     balance = balance + electricity
     return [electricity, cost_payment, balance, date_payment]
+
+
+def check_update_payment(cost_payment, balance, target_contribution_begin, membership_fee_begin, electricity_begin,
+                         target_contribution_end, membership_fee_end, electricity_end):
+    target_contribution_diff = float(target_contribution_end) - float(target_contribution_begin)
+    membership_fee_diff = float(membership_fee_end) - float(membership_fee_begin)
+    electricity_diff = float(electricity_end) - float(electricity_begin)
+    diff = target_contribution_diff + membership_fee_diff + electricity_diff
+    cost_payment = float(cost_payment) + diff
+    balance = float(balance) + diff
+    return [cost_payment, balance]
