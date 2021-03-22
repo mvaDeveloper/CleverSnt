@@ -82,5 +82,6 @@ class UpdatePayment(tk.Toplevel):
         debt_new = update_debt_diff(payment_begin[2], self.entry_cost_payment.get(), payment_begin[4],
                                     payment_begin[5], payment_begin[6],  self.entry_target_contribution.get(),
                                     self.entry_membership_fee.get(), self.entry_electricity.get(),
-                                    debt[2], debt[3], debt[4], debt[5], debt[6])
-        self.dao.debt.update(self.find_v, debt_new[0], debt_new[1], debt_new[2], debt_new[3], debt_new[4], debt_id)
+                                    debt[2], debt[3], debt[4], debt[5])
+        self.dao.debt.update(self.find_v, round(debt_new[0], 2), round(debt_new[1], 2), round(debt_new[2], 2),
+                             round(debt_new[3], 2), round(debt_new[4], 2), debt_id)

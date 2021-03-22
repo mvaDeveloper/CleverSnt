@@ -59,6 +59,7 @@ class DiversityPayment(tk.Toplevel):
         debt_new = debt_calculate_diversity(self.entry_cost_payment.get(), self.entry_target_contribution.get(),
                                             self.entry_membership_fee.get(), self.entry_electricity.get(),
                                             debt[2], debt[3], debt[4], debt[5])
-        self.db.debt.update(self.find_v, debt_new[0], debt_new[1], debt_new[2], debt_new[3], debt_new[4], debt_id)
+        self.db.debt.update(self.find_v, round(debt_new[0], 2), round(debt_new[1], 2), round(debt_new[2], 2),
+                            round(debt_new[3], 2), round(debt_new[4], 2), debt_id)
         view_payments(self.window, self.tree, self.find_v)
         self.destroy()
