@@ -1,19 +1,17 @@
 import datetime
 
 
-def calculation(electricity, square, date_payment, date_begin):
-    year = int(date_payment[-2] + date_payment[-1])
+def calculation(electricity, square, date_begin):
+    today = datetime.datetime.today()
     if date_begin == "":
         date_begin = 0
     else:
         date_begin = float(date_begin)
-    # проверка наличия электричества
     if electricity == "Есть":
         flag = 1
     else:
         flag = 0
-    # рассчет членского взноса исходя из года и коэфициента
-    if year == 20:
+    if today.year == 20:
         if flag == 1:
             membership_fee = square * 4.50
         else:
@@ -23,8 +21,7 @@ def calculation(electricity, square, date_payment, date_begin):
             membership_fee = square * 5
         else:
             membership_fee = square * 4.5
-    # так как нам не известны конечные показания
-    return [membership_fee, date_begin]
+    return [membership_fee, date_begin, today.year]
 
 
 def making_payment(balance, cost_payment):

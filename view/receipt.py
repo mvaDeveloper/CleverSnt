@@ -13,7 +13,6 @@ class ChoiceReceipt(tk.Toplevel):
         self.title('Выбор типа квитанции')
         self.geometry('400x200+100+100')
         title_label(self, 'Выбор типа квитанции', 115, 45)
-
         button(self, 'Главная', self.choice_first, 16, 40, 120)
         button(self, 'Дополнительная', self.choice_second, 16, 210, 120)
 
