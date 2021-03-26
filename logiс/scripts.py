@@ -7,10 +7,12 @@ def calculation(electricity, square, date_begin):
         date_begin = 0
     else:
         date_begin = float(date_begin)
+
     if electricity == "Есть":
         flag = 1
     else:
         flag = 0
+
     if today.year == 20:
         if flag == 1:
             membership_fee = square * 4.50
