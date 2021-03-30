@@ -81,3 +81,18 @@ def debt_calculate_diversity(cost_payment, target_contribution, membership_fee, 
     electricity_debt = electricity_debt - float(electricity)
     balance_debt = cost_payment_debt
     return [cost_payment_debt, target_contribution_debt, membership_fee_debt, electricity_debt, balance_debt]
+
+
+def debt_calculate_delete(target_contribution, membership_fee, electricity, cost_payment_debt,
+                          target_contribution_debt, membership_fee_debt, electricity_debt, type_payment):
+    if type_payment == 'Выставленный':
+        flag = 1
+    else:
+        flag = -1
+    cost_payment = float(target_contribution) + float(membership_fee) + float(electricity)
+    target_contribution_debt = target_contribution_debt - float(target_contribution) * flag
+    membership_fee_debt = membership_fee_debt - float(membership_fee) * flag
+    electricity_debt = electricity_debt - float(electricity) * flag
+    cost_payment_debt = cost_payment_debt - cost_payment * flag
+    balance_debt = cost_payment_debt
+    return [cost_payment_debt, target_contribution_debt, membership_fee_debt, electricity_debt, balance_debt]

@@ -44,11 +44,11 @@ class DebtDao:
 
     def check_debt(self, lot_number, cost_payment, target_contribution, membership_fee, electricity):
         debt = self.get_by_number(lot_number)
-        id_debt = debt[0][0]
         if not debt:
             self.insert(lot_number, cost_payment, target_contribution, membership_fee, electricity, cost_payment)
             self.insert(lot_number, cost_payment, target_contribution, membership_fee, electricity, cost_payment)
         else:
+            id_debt = debt[0][0]
             self.update(
                 lot_number, cost_payment, target_contribution,
                 membership_fee, electricity, cost_payment, id_debt

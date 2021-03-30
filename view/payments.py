@@ -2,6 +2,7 @@ import tkinter as tk
 from view.table_view import view_payments
 from view.utilities import button_menu, tree
 from view.payments_actions import PaymentsMenuActions
+from logiс.scripts import debt_calculate_delete
 
 
 class Payments(tk.Toplevel):
@@ -47,6 +48,11 @@ class Menu:
 
     def delete(self, find_v):
         payment_id = self.tree.set(self.tree.selection()[0], '#1')
+        debt = self.db.debt.get_by_number(find_v)
+        payment = self.db.payment.get_by_id(payment_id)
+        debt_new = debt_calculate_delete(payment[4], payment[5], payment[6], debt[1][2], debt[1][3],
+                                         debt[1][4], debt[1][5], payment[11])
+        self.db.debt.update(find_v, debt_new[0], debt_new[1], debt_new[2], debt_new[3], debt_new[4], debt[1][0])
         self.db.payment.delete(payment_id)
         view_payments(self, self.tree, find_v)
 
