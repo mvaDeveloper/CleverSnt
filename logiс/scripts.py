@@ -35,7 +35,7 @@ def change_electricity(date_end, date_begin, cost_payment, balance, rate_kvt, de
     today = datetime.datetime.today()
     date_payment = str(today.day) + '.' + str(today.month) + '.' + str(today.year)
     electricity = (float(date_end) - float(date_begin)) * float(rate_kvt)
-    cost_payment = float(cost_payment) + electricity + debt_cost_payment
+    cost_payment = float(cost_payment) + electricity
     balance = balance + electricity + debt_cost_payment
     return [electricity, cost_payment, balance, date_payment]
 

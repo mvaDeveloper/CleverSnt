@@ -30,7 +30,7 @@ class ChoiceReceipt(tk.Toplevel):
             debt = self.dao.debt.get_by_id(row[0][0])
             payment = self.dao.payment.get_by_id(self.number)
             owner = self.dao.owner.get_by_number(payment[1])
-            main(payment[1], payment[2], payment[3], payment[5], payment[6],
+            main(payment[1], payment[9], payment[3], payment[5], payment[6],
                  payment[7], payment[8], payment[8] - payment[7], owner[3],
                  owner[4], owner[5], owner[2], debt[2])
         else:

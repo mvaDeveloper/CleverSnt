@@ -31,15 +31,14 @@ class UpdateElectric(tk.Toplevel):
                                      )
         self.dao.payment.update(payment[1], changes[1], changes[3], payment[4], payment[5], changes[0], payment[7],
                                 self.entry_date_end.get(), changes[2], payment[10], payment[11], self.number)
-        self.debt_update(payment[1], payment[4], payment[5], changes[0], changes[2])
+        self.debt_update(payment[1], payment[4], payment[5], changes[0], changes[2], changes[1])
         view_payments(self.window, self.tree, self.find_v)
         self.destroy()
 
     def debt_update(self, lot_number, target_contribution,
-                    membership_fee, electricity, balance,
-                    ):
+                    membership_fee, electricity, balance, cost_payment):
         row = list(self.dao.debt.get_by_number(lot_number))
         debt_id = row[1][0]
         debt = self.dao.debt.get_by_id(debt_id)
-        self.dao.debt.update(lot_number, balance, debt[3] + float(target_contribution),
+        self.dao.debt.update(lot_number, cost_payment + debt[2], debt[3] + float(target_contribution),
                              debt[4] + float(membership_fee), debt[5] + float(electricity), balance, debt_id)

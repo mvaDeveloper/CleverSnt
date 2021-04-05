@@ -24,16 +24,15 @@ def main(lot_number, cost_payment, date_payment, membership_fee, electricity, da
     draw.text((2390, 2540), str(difference), font=headline)
     draw.text((2390, 2660), str(date_begin), font=headline)
     draw.text((2390, 2780), str(date_end), font=headline)
-    draw.text((4000, 2050), lot_number, font=headline)
     draw.text((1550, 3010), date_payment, font=headline)
-    show_save(img_receipt, second_name, lot_number, date_payment)
+    show_save(img_receipt, first_name, lot_number, date_payment)
 
 
 def optional(lot_number, cost_payment, second_name, patronymic, address, first_name):
     today = datetime.datetime.today()
     date_payment = str(today.day) + '.' + str(today.month) + '.' + str(today.year)
     receipt = general(lot_number, cost_payment, second_name, patronymic, address, first_name, date_payment)
-    show_save(receipt[0], second_name, lot_number, date_payment)
+    show_save(receipt[0], first_name, lot_number, date_payment)
 
 
 def general(lot_number, cost_payment, second_name, patronymic, address, first_name, date_payment):
@@ -42,14 +41,14 @@ def general(lot_number, cost_payment, second_name, patronymic, address, first_na
     headline = ImageFont.truetype('arial.ttf', size=100)
     # извещение
     draw.text((3150, 1350), str(cost_payment), font=headline)
-    draw.text((4000, 500), lot_number, font=headline)
-    draw.text((1920, 500), second_name + " " + first_name + " " + patronymic, font=headline)
+    draw.text((4020, 500), lot_number, font=headline)
+    draw.text((1920, 500), first_name + " " + second_name + " " + patronymic, font=headline)
     draw.text((1920, 620), address, font=headline)
     draw.text((1550, 1460), date_payment, font=headline)
     # квитанция
     draw.text((3150, 2900), str(cost_payment), font=headline)
-    draw.text((4000, 2050), lot_number, font=headline)
-    draw.text((1920, 2050), second_name + " " + first_name + " " + patronymic, font=headline)
+    draw.text((4020, 2050), lot_number, font=headline)
+    draw.text((1920, 2050), first_name + " " + second_name + " " + patronymic, font=headline)
     draw.text((1920, 2170), address, font=headline)
     draw.text((1550, 3010), date_payment, font=headline)
     # qrcode
@@ -66,4 +65,5 @@ def general(lot_number, cost_payment, second_name, patronymic, address, first_na
 def show_save(img_receipt, second_name, lot_number, date_payment):
     name_receipt = "receipt/" + second_name + "_" + str(lot_number) + "_" + date_payment + ".png"
     img_receipt.save(name_receipt)
-    img_receipt.show()
+    img = Image.open(name_receipt)
+    img.show()
